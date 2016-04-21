@@ -1,2 +1,0 @@
-V	190419214339Z		9726BF8A4BFC2C39	unknown	/C=MX/ST=Mexico/O=Mexico/OU=Mexico/CN=Mexico
-V	170419214540Z		9726BF8A4BFC2C3A	unknown	/C=MX/ST=mexico/L=Mexico/O=Mexico/OU=Mexico/CN=mexico
